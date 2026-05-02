@@ -14,6 +14,8 @@ CREATE TABLE usuarios (
 CREATE TABLE imoveis (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     endereco TEXT NOT NULL,
+    conta_agua TEXT,
+    conta_energia TEXT,
     cci TEXT UNIQUE NOT NULL,
     status TEXT DEFAULT 'Livre',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
@@ -65,8 +67,35 @@ CREATE TABLE controle_iptu (
 INSERT INTO usuarios (nome, login, senha) 
 VALUES ('Administrador', 'admin', 'admin');
 
--- Configurar RLS (Row Level Security) - Desativado por padrão para facilitar o setup inicial, 
--- mas recomendo configurar permissões por usuário logado posteriormente.
+-- Configurar RLS (Row Level Security) para todas as tabelas
+-- Isso habilita o acesso para as operações de CRUD (Create, Read, Update, Delete)
+
+-- Tabela: usuarios
 ALTER TABLE usuarios ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "Permitir tudo para usuários autenticados" ON usuarios USING (true);
--- Repetir para as outras tabelas conforme sua necessidade de segurança.
+DROP POLICY IF EXISTS "Acesso total usuarios" ON usuarios;
+CREATE POLICY "Acesso total usuarios" ON usuarios FOR ALL USING (true) WITH CHECK (true);
+
+-- Tabela: imoveis
+ALTER TABLE imoveis ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Acesso total imoveis" ON imoveis;
+CREATE POLICY "Acesso total imoveis" ON imoveis FOR ALL USING (true) WITH CHECK (true);
+
+-- Tabela: locatarios
+ALTER TABLE locatarios ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Acesso total locatarios" ON locatarios;
+CREATE POLICY "Acesso total locatarios" ON locatarios FOR ALL USING (true) WITH CHECK (true);
+
+-- Tabela: locacoes
+ALTER TABLE locacoes ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Acesso total locacoes" ON locacoes;
+CREATE POLICY "Acesso total locacoes" ON locacoes FOR ALL USING (true) WITH CHECK (true);
+
+-- Tabela: alugueis
+ALTER TABLE alugueis ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Acesso total alugueis" ON alugueis;
+CREATE POLICY "Acesso total alugueis" ON alugueis FOR ALL USING (true) WITH CHECK (true);
+
+-- Tabela: controle_iptu
+ALTER TABLE controle_iptu ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Acesso total iptu" ON controle_iptu;
+CREATE POLICY "Acesso total iptu" ON controle_iptu FOR ALL USING (true) WITH CHECK (true);

@@ -2,7 +2,7 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
- 
+
 import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
@@ -270,7 +270,11 @@ export default function App() {
 
     try {
       let user;
-      if (import.meta.env.VITE_SUPABASE_URL) {
+      const isSupabaseConfigured = import.meta.env.VITE_SUPABASE_URL && 
+                                  import.meta.env.VITE_SUPABASE_URL.startsWith('http') &&
+                                  !import.meta.env.VITE_SUPABASE_URL.includes('placeholder');
+
+      if (isSupabaseConfigured) {
         const { data, error } = await supabase
           .from('usuarios')
           .select('*')
@@ -278,7 +282,16 @@ export default function App() {
           .eq('senha', senha)
           .single();
         
-        if (error || !data) throw new Error('Credenciais inválidas');
+        if (error) {
+          console.error("Erro Supabase:", error);
+          if (error.code === 'PGRST116') { // Nenhum registro encontrado
+            alert('Usuário ou senha incorretos (Banco Supabase).');
+            return;
+          }
+          throw new Error('Erro ao conectar com o banco de dados.');
+        }
+        
+        if (!data) throw new Error('Usuário não encontrado.');
         user = { ...data, permissao: 'ADMIN' } as User;
       } else {
         user = users.find(u => u.login === login && u.senha === senha);
@@ -292,7 +305,7 @@ export default function App() {
       }
     } catch (err) {
       console.error(err);
-      alert('Login ou senha incorretos.');
+      alert(err instanceof Error ? err.message : 'Ocorreu um erro ao tentar realizar o login.');
     }
   };
 
