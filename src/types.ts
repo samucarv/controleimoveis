@@ -11,6 +11,7 @@ export interface User {
   login: string;
   senha: string;
   permissao: UserPermission;
+  status?: string;
 }
 
 export interface Imovel {

@@ -376,7 +376,7 @@ export default function App() {
     { id: 'imoveis', label: 'Imóveis', icon: Building2 },
     { id: 'locatarios', label: 'Locatários', icon: Users },
     { id: 'locacoes', label: 'Contratos', icon: FileText },
-    { id: 'alugueis', label: 'Controle Financeiro', icon: Calendar },
+    { id: 'alugueis', label: 'Controle Aluguel', icon: Calendar },
     { id: 'iptu', label: 'Controle IPTU', icon: ClipboardCheck },
     ...(authUser.permissao === 'ADMIN' ? [{ id: 'usuarios', label: 'Usuários', icon: UserCircle }] : []),
   ];
@@ -593,27 +593,27 @@ const ViewImoveis = ({ imoveis, setImoveis }: { imoveis: Imovel[], setImoveis: R
         </button>
       </div>
 
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[600px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Endereço</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Contas</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CCI</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Endereço</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Contas</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CCI</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {filteredImoveis.map(imovel => (
               <tr key={imovel.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{imovel.endereco}</td>
-                <td className="px-6 py-4 text-[10px] font-mono text-slate-500 dark:text-slate-400">
+                <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{imovel.endereco}</td>
+                <td className="px-6 py-4 text-xs font-mono text-slate-500 dark:text-slate-400">
                   <div className="flex flex-col gap-0.5">
                     <span>Água: {imovel.contaAgua}</span>
                     <span>Luz: {imovel.contaEnergia}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">{imovel.cci}</td>
+                <td className="px-6 py-4 font-mono text-sm text-slate-500 dark:text-slate-400">{imovel.cci}</td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex justify-end gap-2">
                     <button 
@@ -633,7 +633,7 @@ const ViewImoveis = ({ imoveis, setImoveis }: { imoveis: Imovel[], setImoveis: R
               </tr>
             ))}
             {filteredImoveis.length === 0 && (
-              <tr><td colSpan={4} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhum imóvel encontrado.</td></tr>
+              <tr><td colSpan={4} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhum imóvel encontrado.</td></tr>
             )}
           </tbody>
         </table>
@@ -744,22 +744,22 @@ const ViewLocatarios = ({ locatarios, setLocatarios }: { locatarios: Locatario[]
           <Plus size={16} /> Novo Locatário
         </button>
       </div>
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[600px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Nome</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CPF</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Telefone</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Nome</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CPF</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Telefone</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {filteredLocatarios.map(l => (
               <tr key={l.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{l.nome}</td>
-                <td className="px-6 py-4 text-xs font-mono text-slate-500 dark:text-slate-400">{l.cpf}</td>
-                <td className="px-6 py-4 text-xs text-slate-500 dark:text-slate-400">
+                <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{l.nome}</td>
+                <td className="px-6 py-4 text-sm font-mono text-slate-500 dark:text-slate-400">{l.cpf}</td>
+                <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
                   {l.telefone}
                 </td>
                 <td className="px-6 py-4 text-right">
@@ -778,7 +778,7 @@ const ViewLocatarios = ({ locatarios, setLocatarios }: { locatarios: Locatario[]
               </tr>
             ))}
             {filteredLocatarios.length === 0 && (
-              <tr><td colSpan={4} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhum locatário encontrado.</td></tr>
+              <tr><td colSpan={4} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhum locatário encontrado.</td></tr>
             )}
           </tbody>
         </table>
@@ -907,15 +907,15 @@ const ViewLocacoes = ({
           <Plus size={16} /> Nova Locação
         </button>
       </div>
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[700px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Inquilino</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Imóvel</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Valor</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Fim</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Inquilino</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Imóvel</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Valor</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Fim</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -924,12 +924,12 @@ const ViewLocacoes = ({
               const locatario = locatarios.find(lo => lo.id === l.locatarioId);
               return (
                 <tr key={l.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{locatario?.nome || 'N/A'}</td>
-                  <td className="px-6 py-4 text-[10px] text-slate-600 dark:text-slate-400 truncate max-w-[200px]">{imovel?.endereco || 'N/A'}</td>
-                  <td className="px-6 py-4 text-xs font-black text-indigo-600 text-right">
+                  <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{locatario?.nome || 'N/A'}</td>
+                  <td className="px-6 py-4 text-xs text-slate-600 dark:text-slate-400 truncate max-w-[200px]">{imovel?.endereco || 'N/A'}</td>
+                  <td className="px-6 py-4 text-sm font-black text-indigo-600 text-right">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(l.valor)}
                   </td>
-                  <td className="px-6 py-4 text-xs font-mono text-slate-500 dark:text-slate-400 text-center">
+                  <td className="px-6 py-4 text-sm font-mono text-slate-500 dark:text-slate-400 text-center">
                     {format(parseISO(l.dataFim), 'dd/MM/yyyy')}
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -949,7 +949,7 @@ const ViewLocacoes = ({
               );
             })}
             {filteredLocacoes.length === 0 && (
-              <tr><td colSpan={5} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhuma locação encontrada.</td></tr>
+              <tr><td colSpan={5} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhuma locação encontrada.</td></tr>
             )}
           </tbody>
         </table>
@@ -1050,10 +1050,42 @@ const ViewControleAluguel = ({
     }
   };
 
-  const changeMonth = (offset: number) => {
+  const changeMonth = async (offset: number) => {
     const d = parseISO(`${selectedMonth}-01`);
     const newDate = offset > 0 ? addMonths(d, 1) : subMonths(d, 1);
-    setSelectedMonth(format(newDate, 'yyyy-MM'));
+    const newMonth = format(newDate, 'yyyy-MM');
+    setSelectedMonth(newMonth);
+
+    // Auto-geração de registros para o novo mês
+    const alugueisDoMes = alugueis.filter(a => a.mesReferencia === newMonth);
+    const hashesExistentes = new Set(alugueisDoMes.map(a => a.locacaoId));
+
+    const locacoesAtivas = locacoes.filter(l => {
+      const start = parseISO(l.dataInicio);
+      const end = parseISO(l.dataFim);
+      const current = parseISO(`${newMonth}-01`);
+      return (current >= start && current <= end);
+    });
+
+    const paraCriar = locacoesAtivas.filter(l => !hashesExistentes.has(l.id));
+
+    if (paraCriar.length > 0) {
+      try {
+        const novosRegistros = [];
+        for (const locacao of paraCriar) {
+          const aluguelInit: Partial<ControleAluguel> = {
+            locacaoId: locacao.id,
+            mesReferencia: newMonth,
+            situacao: SituacaoAluguel.NO_PRAZO,
+          };
+          const created = await dbService.saveAluguel(aluguelInit);
+          novosRegistros.push(created);
+        }
+        setAlugueis(prev => [...prev, ...novosRegistros]);
+      } catch (err) {
+        console.error("Erro na geração automática:", err);
+      }
+    }
   };
 
   const filteredAlugueis = alugueis.filter(a => {
@@ -1091,15 +1123,15 @@ const ViewControleAluguel = ({
           <button onClick={() => changeMonth(1)} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md text-slate-500 transition-colors"><ChevronRight size={16} /></button>
         </div>
       </div>
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[700px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Inquilino</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Imóvel</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Vencimento</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Status</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Inquilino</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Imóvel</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Vencimento</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Status</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -1109,14 +1141,14 @@ const ViewControleAluguel = ({
               const imovel = imoveis.find(i => i.id === locacao?.imovelId);
               return (
                 <tr key={a.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{locatario?.nome}</td>
-                  <td className="px-6 py-4 text-[10px] text-slate-500 dark:text-slate-400">{imovel?.endereco}</td>
-                  <td className="px-6 py-4 text-xs font-mono text-slate-500 dark:text-slate-400 text-center">{locacao?.diaVencimento}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{locatario?.nome}</td>
+                  <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">{imovel?.endereco}</td>
+                  <td className="px-6 py-4 text-sm font-mono text-slate-500 dark:text-slate-400 text-center">{locacao?.diaVencimento}</td>
                   <td className="px-6 py-4 text-center">
                     <button 
                       onClick={() => toggleSituacao(a.id)}
                       className={cn(
-                        "px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95",
+                        "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95",
                         a.situacao === SituacaoAluguel.PAGO 
                           ? "bg-emerald-500 text-white hover:bg-emerald-600" 
                           : "bg-red-500 text-white hover:bg-red-600"
@@ -1125,7 +1157,7 @@ const ViewControleAluguel = ({
                       {a.situacao}
                     </button>
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-6 py-4 text-right text-sm">
                     <button onClick={() => handleDelete(a.id)} className="text-slate-400 hover:text-red-500 p-2 transition-colors">
                       <Trash2 size={16} />
                     </button>
@@ -1134,7 +1166,7 @@ const ViewControleAluguel = ({
               );
             })}
             {filteredAlugueis.length === 0 && (
-              <tr><td colSpan={5} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhum registro encontrado.</td></tr>
+              <tr><td colSpan={5} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhum registro encontrado.</td></tr>
             )}
           </tbody>
         </table>
@@ -1202,14 +1234,14 @@ const ViewControleIPTU = ({
         </div>
         <span className="text-[10px] font-black uppercase tracking-widest text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1.5 rounded-full">Exercício 2026</span>
       </div>
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[700px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Endereço do Imóvel</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CCI</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Status</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Endereço do Imóvel</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">CCI</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Status</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
@@ -1218,20 +1250,20 @@ const ViewControleIPTU = ({
               const isPaid = status?.situacao === SituacaoIPTU.PAGO;
               return (
                 <tr key={i.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{i.endereco}</td>
-                  <td className="px-6 py-4 text-xs font-mono text-slate-500 dark:text-slate-400">{i.cci}</td>
+                  <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{i.endereco}</td>
+                  <td className="px-6 py-4 text-sm font-mono text-slate-500 dark:text-slate-400">{i.cci}</td>
                   <td className="px-6 py-4 text-center">
                     <button 
                       onClick={() => toggleIptu(i.id)}
                       className={cn(
-                        "px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95",
+                        "px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all shadow-sm active:scale-95",
                         isPaid ? "bg-emerald-500 text-white hover:bg-emerald-600" : "bg-red-500 text-white hover:bg-red-600 font-bold"
                       )}
                     >
                       {isPaid ? "PAGO" : "PENDENTE"}
                     </button>
                   </td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-6 py-4 text-right text-sm">
                     <button 
                       onClick={() => setIptu(iptu.filter(ip => ip.imovelId !== i.id))}
                       className="text-slate-400 hover:text-red-500 p-2 transition-colors"
@@ -1243,7 +1275,7 @@ const ViewControleIPTU = ({
               );
             })}
             {filteredImoveis.length === 0 && (
-              <tr><td colSpan={4} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhum registro encontrado.</td></tr>
+              <tr><td colSpan={4} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhum registro encontrado.</td></tr>
             )}
           </tbody>
         </table>
@@ -1322,31 +1354,31 @@ const ViewUsuarios = ({
           <Plus size={16} /> Novo Usuário
         </button>
       </div>
-      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
-        <table className="w-full text-left border-collapse">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[500px]">
           <thead className="bg-slate-50 dark:bg-slate-800 sticky top-0">
             <tr className="border-b border-slate-200 dark:border-slate-700">
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Nome do Usuário</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Login</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Permissão</th>
-              <th className="px-6 py-3 text-[10px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Nome do Usuário</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest">Login</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-center">Permissão</th>
+              <th className="px-6 py-3 text-xs uppercase text-slate-500 dark:text-slate-400 font-bold tracking-widest text-right">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {filteredUsers.map(u => (
               <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                <td className="px-6 py-4 text-xs font-bold text-slate-900 dark:text-slate-200">{u.nome}</td>
-                <td className="px-6 py-4 text-[10px] font-mono text-slate-500 dark:text-slate-400">{u.login}</td>
+                <td className="px-6 py-4 text-sm font-bold text-slate-900 dark:text-slate-200">{u.nome}</td>
+                <td className="px-6 py-4 text-sm font-mono text-slate-500 dark:text-slate-400">{u.login}</td>
                 <td className="px-6 py-4 text-center">
                   <span className={cn(
-                    "px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest",
+                    "px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest",
                     u.permissao === 'ADMIN' ? "bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400" : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400"
                   )}>
                     {u.permissao}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-right">
-                  <div className="flex justify-end gap-2">
+                  <div className="flex justify-end gap-2 text-sm">
                     <button 
                       onClick={() => { setEditing(u); setShowAdd(true); }}
                       className="text-slate-400 hover:text-indigo-600 transition-colors p-2"
@@ -1363,7 +1395,7 @@ const ViewUsuarios = ({
               </tr>
             ))}
             {filteredUsers.length === 0 && (
-              <tr><td colSpan={4} className="p-12 text-center text-xs text-slate-400 uppercase tracking-widest">Nenhum usuário encontrado.</td></tr>
+              <tr><td colSpan={4} className="p-12 text-center text-sm text-slate-400 uppercase tracking-widest">Nenhum usuário encontrado.</td></tr>
             )}
           </tbody>
         </table>

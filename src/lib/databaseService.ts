@@ -14,7 +14,7 @@ export const dbService = {
       login: u.login,
       senha: u.senha,
       status: u.status,
-      permissao: 'ADMIN' // Por padrão no seu app anterior
+      permissao: u.permissao || 'USUÁRIO'
     })) as User[];
   },
 
@@ -24,7 +24,8 @@ export const dbService = {
       nome: user.nome,
       login: user.login,
       senha: user.senha,
-      status: user.status
+      status: user.status,
+      permissao: user.permissao
     }).select();
     if (error) throw error;
     return data[0];
